@@ -1,29 +1,3 @@
-
-Skip to content
-This repository
-
-    Pull requests
-    Issues
-    Marketplace
-    Gist
-
-    @liuying350169
-
-2
-5
-
-    25
-
-dmep2017/dmep2017.github.io
-Code
-Issues 0
-Pull requests 0
-Projects 0
-Wiki
-dmep2017.github.io/in-class-demo-d3/index.html
-490b249 20 minutes ago
-@hupili hupili Add axis
-153 lines (129 sloc) 4.25 KB
 <html>
 
 <head>
@@ -45,18 +19,23 @@ dmep2017.github.io/in-class-demo-d3/index.html
             //     .attr('cx', 50)
             //     .attr('cy', 160)
             //     .attr('r', 10)
+
+
         var gdpScale = d3.scaleLinear()
             .domain([0, 300000])
             .range([0, 300])
+
         var lifeScale = d3.scaleLinear()
             .domain([0, 100])
             .range([200, 0])
+
         function updateChart(data) {
             var circles = svg
                 .selectAll('circle')
                 .data(data, function(d, i) {
                     return d['Country']
                 })
+
             circles
                 .enter()
                 .append('circle')
@@ -74,6 +53,7 @@ dmep2017.github.io/in-class-demo-d3/index.html
                     // console.log(i)
                     return lifeScale(d['Life'])
                 })
+
             circles
                 .exit()
                 .transition()
@@ -81,11 +61,14 @@ dmep2017.github.io/in-class-demo-d3/index.html
                 .on('end', function() {
                     d3.select(this).remove()
                 })
+
+
             var texts = svg
                 .selectAll('text')
                 .data(data, function(d, i) {
                     return d['Country']
                 })
+
             texts
                 .enter()
                 .append('text')
@@ -101,6 +84,7 @@ dmep2017.github.io/in-class-demo-d3/index.html
                     return lifeScale(d['Life'])
                 })
                 .transition()
+
             texts
                 .exit()
                 .transition()
@@ -108,11 +92,13 @@ dmep2017.github.io/in-class-demo-d3/index.html
                 .on('end', function() {
                     d3.select(this).remove()
                 })
+
             // svg.selectAll('circle')
             //     .on('click', function() {
             //         console.log('here');
             //         d3.select(this).remove()
             //     })
+
             // svg.on('click', function() {
             //     console.log('there');
             //     svg.append('circle')
@@ -121,6 +107,7 @@ dmep2017.github.io/in-class-demo-d3/index.html
             //         .attr('cy', d3.event.clientY)
             // })
         }
+
         d3.json('data.json', function(myData) {
             // console.log(myData)
             var yearIndex = 0
@@ -130,16 +117,20 @@ dmep2017.github.io/in-class-demo-d3/index.html
             updateChart(myData[yearIndex])
             yearIndex = (yearIndex + 1) % myData.length
                 // }, 1000)
+
+
             var gdpAxis = d3.axisBottom(gdpScale)
             svg
                 .append('g')
                 .attr('transform', 'translate(0, 150)')
                 .call(gdpAxis)
+
             var lifeAxis = d3.axisLeft(lifeScale)
             svg
                 .append('g')
                 .attr('transform', 'translate(20, 0)')
                 .call(lifeAxis)
+
         })
     </script>
 </body>
@@ -160,8 +151,3 @@ dmep2017.github.io/in-class-demo-d3/index.html
 </g>
                 
         </svg> -->
-
-    Contact GitHub API Training Shop Blog About 
-
-    © 2017 GitHub, Inc. Terms Privacy Security Status Help 
-
